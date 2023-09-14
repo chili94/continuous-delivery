@@ -2,24 +2,20 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                // Build your Docker image
-                sh 'docker build -t my-app-image .'
+                sh 'docker build -t my-app-image:latest .'
             }
         }
 
-        stage('Test') {
+        stage('Push Docker Image to Registry') {
             steps {
-                // Run your application tests
-                sh 'docker run my-app-image tests'
-            }
-        }
-
-        stage('Deploy') {
-            steps {
-                // Deploy your application to a non-production environment
-                sh 'docker-compose up -d'
+                script {
+                    docker.withRegistry('https://hub.docker.com', 'goran94hub') {
+                        def customImage = docker.image('my-app-image:latest')
+                        customImage.push()
+                    }
+                }
             }
         }
     }
