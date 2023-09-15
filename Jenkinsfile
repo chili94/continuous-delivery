@@ -13,7 +13,7 @@ pipeline {
                 script {
 		    sh 'docker login -u goran94hub -p sisajkaru93'
 		    sh 'docker push goran94hub/my-app-image:latest'                    
-                    }
+                    
                 }
             }
         }
