@@ -12,9 +12,11 @@ pipeline {
             steps {
                 script {
 		    sh 'docker login -u goran94hub -p sisajkaru93'
-                    docker.withRegistry('https://hub.docker.com', 'goran94hub') {
-                        def customImage = docker.image('my-app-image:latest')
-                        customImage.push()
+		    sh 'docker push goran94hub/my-app-image:latest'                    
+
+# docker.withRegistry('https://hub.docker.com', 'goran94hub') {
+                    #    def customImage = docker.image('my-app-image:latest')
+                    #    customImage.push()
                     }
                 }
             }
