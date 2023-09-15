@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build Docker Image') {
             steps {
-                sh 'docker build -t my-app-image:latest .'
+                sh 'docker build -t goran94hub/my-app-image:latest .'
             }
         }
 
